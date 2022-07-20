@@ -25,6 +25,11 @@ void AARLCharacter::BeginPlay()
 	
 }
 
+void AARLCharacter::MoveForward(float value)
+{
+	AddMovementInput(GetActorForwardVector(), value);
+}
+
 // Called every frame
 void AARLCharacter::Tick(float DeltaTime)
 {
@@ -37,5 +42,8 @@ void AARLCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAxis("MoveForward", this, &AARLCharacter::MoveForward);
+
+	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 }
 
